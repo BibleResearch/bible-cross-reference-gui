@@ -1,7 +1,6 @@
-# Simple Clojure Web App
+# Bible Cross Reference GUI
 
-A simple web app for experimentation in Clojure (specifically using [luminus](https://luminusweb.com/)).
-
+A GUI (built in Clojure - specifically using [luminus](https://luminusweb.com/)) for interacting with cross references throughout the Bible.
 
 ## Usage
 
@@ -14,7 +13,6 @@ docker-compose run --service-ports dev
 Then (once in the dev environment):
 
 ```
-cd guestbook/
-lein run migrate
+cd bible-cross-ref-gui/
 lein run
 ```
