@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="columns">
+    <div class="column">
+      <form method="POST" action="/search">
+        {% csrf-field %}
+        <input class="input" type="text" name="query" placeholder="Search..." />
+      </form>
+    </div>
+  </div>
+
+<h2>Data!!!</h2>
+
+{% if query %}
+{{ query }}
+{% endif %}
+
+<ul class="data">
+{% for item in data %}
+    <li>{{item}}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
