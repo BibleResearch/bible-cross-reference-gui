@@ -4,14 +4,12 @@
   :url "http://example.com/FIXME"
 
   :dependencies [[clojure.java-time "0.3.2"]
-                 [com.h2database/h2 "1.4.200"]
-                 [conman "0.9.1"]
                  [cprop "0.1.17"]
+                 [clojure-csv "2.0.2"]
                  [expound "0.8.9"]
                  [funcool/struct "1.4.0"]
                  [json-html "0.4.7"]
                  [luminus-immutant "0.2.5"]
-                 [luminus-migrations "0.7.1"]
                  [luminus-transit "0.1.2"]
                  [markdown-clj "1.10.5"]
                  [metosin/muuntaja "0.6.8"]
@@ -29,8 +27,7 @@
                  [ring-webjars "0.2.0"]
                  [ring/ring-core "1.9.3"]
                  [ring/ring-defaults "0.3.2"]
-                 [selmer "1.12.40"]
-                 [clojure-csv "2.0.2"]]
+                 [selmer "1.12.40"]]
 
   :min-lein-version "2.0.0"
   

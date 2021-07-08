@@ -17,9 +17,9 @@
 {% endif %}
 
 <ul class="data">
-{% for item in data %}
-    <li>{{item}}</li>
-{% endfor %}
+  {% for result in results %}
+      <li>{{ result }}</li>
+  {% endfor %}
 </ul>
 
 {% endblock %}

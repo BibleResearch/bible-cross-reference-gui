@@ -1,6 +1,7 @@
 (ns bible-cross-ref-gui.routes.home
   (:require
    [bible-cross-ref-gui.layout :as layout]
+   [bible-cross-ref-gui.db.core :as db]
    [clojure.java.io :as io]
    [bible-cross-ref-gui.middleware :as middleware]
    [ring.util.response]

@@ -9,20 +9,26 @@
 (defn take-csv
   "Takes file name and reads data."
   [fname]
-    (csv/parse-csv (slurp (io/resource fname))))
+  (csv/parse-csv (slurp (io/resource fname))))
 
-(defn get-data [{:keys [flash] :as request}]
-  (layout/render request "search.html" (merge {:data (take-csv "csv/cross-refs.csv")}
-                                            (select-keys flash [:name :message :errors]))))
+(defn get-search-results [query]
+  (let [cross-refs (take-csv "csv/cross-refs.csv")]
+    (for [ref cross-refs]
+      (if (or 
+           (= query (first ref))
+           (= query (second ref)))
+          ref))))
 
-(defn search [{:keys [flash] :as request}]
-  (layout/render request "search.html" (merge {:data (take-csv "csv/cross-refs.csv")
-                                               :query (get (get request :params) :query)}
-                                                  (select-keys flash [:name :message :errors]))))
+(defn show-search-results [{:keys [flash] :as request}]
+  (let [query (get-in request [:params :query])]
+    (layout/render request "search.html"
+                   (merge {:results (get-search-results query)
+                           :query query}
+                          (select-keys flash [:name :message :errors])))))
 
 (defn cross-ref-routes []
   [""
    {:middleware [middleware/wrap-csrf
                  middleware/wrap-formats]}
-   ["/search" {:get get-data
-               :post search}]])
+   ["/search" {:get show-search-results
+               :post show-search-results}]])
