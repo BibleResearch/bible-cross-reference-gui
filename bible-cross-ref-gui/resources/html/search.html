@@ -1,28 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-
-<div class="columns">
-  <div class="column">
-    <form method="POST" action="/search">
-      {% csrf-field %}
-      <input class="input" type="text" name="query" value="Gen.1.1" />
-      <input type="submit" value="Search">
-    </form>
+  <div class="columns">
+    <div class="column">
+      <form method="POST" action="/search">
+        {% csrf-field %}
+        <input class="input" type="text" name="query" placeholder="Search for a Bible passage" {% if query %}value="{{ query }}"{% endif %} />
+        <input type="submit" value="Search">
+      </form>
+    </div>
   </div>
-</div>
 
-{% if query %}
-<p>Results for <b>{{ query }}</b>:</p>
-{% endif %}
+  {% if query %}
+    <p>Results for "<b>{{ query }}</b>":</p>
+  {% endif %}
 
-{% if results %}
-<div>
-  <ul>
-    {% for result in results %}
-      <li>{{ result|join:" ⭤ " }}</li>
-    {% endfor %}
-  </ul>
-</div>
-{% endif %}
-
+  {% if results %}
+    <div>
+      <ul>
+        {% for result in results %}
+          <li>{{ result|take:2|join:" ⭤ " }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
 {% endblock %}
