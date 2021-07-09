@@ -11,20 +11,27 @@
   [fname]
   (csv/parse-csv (slurp (io/resource fname))))
 
+(defn match?
+  "Determine whether the query matches the cross-ref"
+  [query cross-ref]
+  (or
+   (= query (first cross-ref))
+   (= query (second cross-ref))))
+
+(defn find-matches [query cross-ref]
+  (if (match? query cross-ref)
+    cross-ref
+    nil))
+
 (defn get-search-results [query]
-  (if (not-empty query)
-    (let [cross-refs (take-csv "csv/cross-refs.csv")]
-      (for [ref cross-refs]
-        (if (or
-             (= query (first ref))
-             (= query (second ref)))
-          ref
-          [])))
-    ()))
+  (let [cross-refs (take-csv "csv/cross-refs.csv")]
+      (remove nil? (map find-matches (repeat query) cross-refs))))
 
 (defn show-search-results [{:keys [flash] :as request}]
   (let [query (get-in request [:params :query])
-        results (get-search-results query)]
+        results (if (not-empty query)
+                  (get-search-results query)
+                  ())]
     (layout/render request "search.html"
                    (merge {:results results
                            :query query}
