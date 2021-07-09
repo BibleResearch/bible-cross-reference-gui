@@ -2,24 +2,27 @@
 {% block content %}
 
 <div class="columns">
-    <div class="column">
-      <form method="POST" action="/search">
-        {% csrf-field %}
-        <input class="input" type="text" name="query" placeholder="Search..." />
-      </form>
-    </div>
+  <div class="column">
+    <form method="POST" action="/search">
+      {% csrf-field %}
+      <input class="input" type="text" name="query" value="Gen.1.1" />
+      <input type="submit" value="Search">
+    </form>
   </div>
-
-<h2>Data!!!</h2>
+</div>
 
 {% if query %}
-{{ query }}
+<p>Results for <b>{{ query }}</b>:</p>
 {% endif %}
 
-<ul class="data">
-  {% for result in results %}
-      <li>{{ result }}</li>
-  {% endfor %}
-</ul>
+{% if results %}
+<div>
+  <ul>
+    {% for result in results %}
+      <li>{{ result|join:" ⭤ " }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
 
 {% endblock %}

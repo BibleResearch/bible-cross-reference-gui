@@ -12,17 +12,21 @@
   (csv/parse-csv (slurp (io/resource fname))))
 
 (defn get-search-results [query]
-  (let [cross-refs (take-csv "csv/cross-refs.csv")]
-    (for [ref cross-refs]
-      (if (or 
-           (= query (first ref))
-           (= query (second ref)))
-          ref))))
+  (if (not-empty query)
+    (let [cross-refs (take-csv "csv/cross-refs.csv")]
+      (for [ref cross-refs]
+        (if (or
+             (= query (first ref))
+             (= query (second ref)))
+          ref
+          [])))
+    ()))
 
 (defn show-search-results [{:keys [flash] :as request}]
-  (let [query (get-in request [:params :query])]
+  (let [query (get-in request [:params :query])
+        results (get-search-results query)]
     (layout/render request "search.html"
-                   (merge {:results (get-search-results query)
+                   (merge {:results results
                            :query query}
                           (select-keys flash [:name :message :errors])))))
 
