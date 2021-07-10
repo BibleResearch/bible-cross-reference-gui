@@ -3,7 +3,6 @@
     [bible-cross-ref-gui.middleware :as middleware]
     [bible-cross-ref-gui.layout :refer [error-page]]
     [bible-cross-ref-gui.routes.home :refer [home-routes]]
-    [bible-cross-ref-gui.routes.cross-ref :refer [cross-ref-routes]]
     [reitit.ring :as ring]
     [ring.middleware.content-type :refer [wrap-content-type]]
     [ring.middleware.webjars :refer [wrap-webjars]]
@@ -18,7 +17,7 @@
   :start
   (ring/ring-handler
     (ring/router
-      [(home-routes) (cross-ref-routes)])
+      [(home-routes)])
     (ring/routes
       (ring/create-resource-handler
         {:path "/"})
