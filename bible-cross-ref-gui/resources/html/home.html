@@ -11,16 +11,18 @@
   </div>
 
   {% if query %}
-    <p>Results for "<b>{{ query }}</b>":</p>
+    {% if results|empty? %}
+      <p>No results for "<b>{{ query }}</b>". Try another search.</p>
+    {% else %}
+      <p>Results for "<b>{{ query }}</b>":</p>
+    {% endif %}
   {% endif %}
 
-  {% if results %}
-    <div>
-      <ul>
-        {% for result in results %}
-          <li>{{ result|take:2|join:" ⭤ " }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
+  <div>
+    <ul>
+      {% for result in results %}
+        <li>{{ result|take:2|join:" ⭤ " }}</li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}
