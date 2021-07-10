@@ -37,13 +37,6 @@
                            :query query}
                           (select-keys flash [:name :message :errors])))))
 
-(defn cross-ref-routes []
-  [""
-   {:middleware [middleware/wrap-csrf
-                 middleware/wrap-formats]}
-   ["/search" {:get show-search-results
-               :post show-search-results}]])
-
 (defn about-page [request]
   (layout/render request "about.html"))
 
