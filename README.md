@@ -1,6 +1,6 @@
-# Bible Cross Reference GUI
+# Bible Cross Reference Service
 
-A GUI (built in Clojure - specifically using [luminus](https://luminusweb.com/)) for interacting with cross references throughout the Bible.
+An API and GUI (built in Clojure - specifically using [luminus](https://luminusweb.com/)) for interacting with cross references throughout the Bible.
 
 ## Usage
 
@@ -13,6 +13,6 @@ docker-compose run --service-ports dev
 Then (once in the dev environment):
 
 ```
-cd bible-cross-ref-gui/
+cd bible-cross-ref-service/
 lein run
 ```
