@@ -1,7 +1,6 @@
 (ns user
   "Userspace functions you can run by default in your local REPL."
   (:require
-   [bible-cross-ref-service.config :refer [env]]
     [clojure.pprint]
     [clojure.spec.alpha :as s]
     [expound.alpha :as expound]
