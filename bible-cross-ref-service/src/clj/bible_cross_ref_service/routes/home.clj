@@ -42,8 +42,7 @@
 
 (defn home-routes []
   [ "" 
-   {:middleware [middleware/wrap-csrf
-                 middleware/wrap-formats]}
+   {:middleware [middleware/wrap-formats]}
    ["/" {:get show-search-results
          :post show-search-results}]
    ["/about" {:get about-page}]])

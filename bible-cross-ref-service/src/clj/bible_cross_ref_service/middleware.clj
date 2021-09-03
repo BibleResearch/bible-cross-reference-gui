@@ -3,10 +3,8 @@
     [bible-cross-ref-service.env :refer [defaults]]
     [clojure.tools.logging :as log]
     [bible-cross-ref-service.layout :refer [error-page]]
-    [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
     [bible-cross-ref-service.middleware.formats :as formats]
     [muuntaja.middleware :refer [wrap-format wrap-params]]
-    [bible-cross-ref-service.config :refer [env]]
     [ring.middleware.flash :refer [wrap-flash]]
     [immutant.web.middleware :refer [wrap-session]]
     [ring.middleware.defaults :refer [site-defaults wrap-defaults]])
@@ -21,15 +19,6 @@
         (error-page {:status 500
                      :title "Something very bad has happened!"
                      :message "We've dispatched a team of highly trained gnomes to take care of the problem."})))))
-
-(defn wrap-csrf [handler]
-  (wrap-anti-forgery
-    handler
-    {:error-response
-     (error-page
-       {:status 403
-        :title "Invalid anti-forgery token"})}))
-
 
 (defn wrap-formats [handler]
   (let [wrapped (-> handler wrap-params (wrap-format formats/instance))]
