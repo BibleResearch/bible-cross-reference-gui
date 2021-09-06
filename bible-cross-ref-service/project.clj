@@ -27,7 +27,8 @@
                  [ring-webjars "0.2.0"]
                  [ring/ring-core "1.9.3"]
                  [ring/ring-defaults "0.3.2"]
-                 [selmer "1.12.40"]]
+                 [selmer "1.12.40"]
+                 [org.clojure/clojurescript "1.10.758"]]
 
   :min-lein-version "2.0.0"
   
@@ -37,7 +38,12 @@
   :target-path "target/%s/"
   :main ^:skip-aot bible-cross-ref-service.core
 
-  :plugins [[lein-immutant "2.1.0"]] 
+  :plugins [[lein-immutant "2.1.0"] [lein-cljsbuild "1.1.8"]]
+
+  :cljsbuild {:builds [{:source-paths ["src/cljs/bible_cross_ref_service"]
+                        :compiler {:output-to "resources/public/js/main.js"
+                                   :optimizations :whitespace
+                                   :pretty-print true}}]}
 
   :profiles
   {:uberjar {:omit-source true
