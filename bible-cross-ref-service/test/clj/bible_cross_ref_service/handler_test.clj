@@ -2,7 +2,6 @@
   (:require
    [clojure.test :refer :all]
    [ring.mock.request :refer :all]
-   [ring.middleware.anti-forgery :as af :refer :all]
    [bible-cross-ref-service.handler :refer :all]
    [bible-cross-ref-service.middleware.formats :as formats]
    [muuntaja.core :as m]

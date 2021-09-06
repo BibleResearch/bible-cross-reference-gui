@@ -3,7 +3,6 @@
   <div class="columns">
     <div class="column">
       <form method="POST" action="/">
-        {% csrf-field %}
         <input class="input" type="text" name="query" placeholder="Search for a Bible passage" {% if query %}value="{{ query }}"{% endif %} />
         <input type="submit" value="Search">
       </form>
