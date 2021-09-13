@@ -20,6 +20,6 @@ clj
 This will drop you into a repl where you can start the server by running:
 
 ```
-(require 'service)
-(service/start-dev)
+(require 'server)
+(server/start-dev)
 ```
