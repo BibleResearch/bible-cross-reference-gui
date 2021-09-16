@@ -18,6 +18,7 @@
   (try
     (doseq [ns-sym (tracker)]
       (require ns-sym :reload)
+      (restart-dev)
       (println (str "Reloaded " ns-sym)))
     (catch Throwable e (.printStackTrace e)))
   (Thread/sleep 100))
@@ -31,16 +32,20 @@
       (.setDaemon true)
       (.start))))
 
-(defn start-dev []
+(defn- start-dev-server []
   (reset! server
           (http/start (http/create-server
                        (assoc service-map
-                              ::http/join? false))))
-  (start-nstracker))
+                              ::http/join? false)))))
+
+(defn start-dev
+  ([] (start-dev-server))
+  ([reload?] (if (= reload? true)
+    ((start-dev-server) (start-nstracker)))))
 
 (defn stop-dev []
   (http/stop @server))
 
-(defn restart []
+(defn restart-dev []
   (stop-dev)
   (start-dev))
