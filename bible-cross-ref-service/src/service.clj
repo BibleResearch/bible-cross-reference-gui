@@ -1,24 +1,24 @@
 (ns service
-  (:require [clojure.data.json :as json]
+  (:require [io.pedestal.http :as http]
             [io.pedestal.http.route :as route]
             [refs :refer [get-cross-refs]]))
 
 (defn ok [body]
-  {:status 200 :body body :headers {"Content-Type" "application/json"}})
+  {:status 200 :body body})
 
 (def get-search-results
   {:name ::get-search-results
    :enter (fn [context]
-            (println "here")
             (let [query (get-in context [:request :query-params :q])
                   cross-refs (get-cross-refs query)]
-              (assoc-in context [:response :body] cross-refs)))})
+              (assoc context :response (ok cross-refs))))})
 
-(def jsonify
-  {:name ::jsonify
+(def get-status
+  {:name ::get-status
    :enter (fn [context]
-            (assoc context :response (ok (json/write-str (get-in context [:response :body])))))})
+            (assoc context :response (ok {:status "Good"})))})
 
 (def routes
   (route/expand-routes
-   #{["/search" :get [get-search-results jsonify] :route-name :search]}))
+   #{["/search" :get [http/json-body get-search-results] :route-name :search]
+     ["/status" :get [http/json-body get-status] :route-name :status]}))
