@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "html/base.html" %}
 {% block content %}
   <div class="columns">
     <div class="column">
@@ -20,7 +20,7 @@
   <div>
     <ul>
       {% for result in results %}
-        <li>{{ result|take:2|join:" ⭤ " }}</li>
+        <li>{{ result.a }} ⭤ {{ result.b }}</li>
       {% endfor %}
     </ul>
   </div>
