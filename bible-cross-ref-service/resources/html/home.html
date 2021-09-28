@@ -1,27 +1,33 @@
 {% extends "html/base.html" %}
 {% block content %}
-  <div class="columns">
-    <div class="column">
-      <form method="POST" action="/">
-        <input class="input" type="text" name="query" placeholder="Search for a Bible passage" {% if query %}value="{{ query }}"{% endif %} />
-        <input type="submit" value="Search">
-      </form>
-    </div>
-  </div>
-
-  {% if query %}
-    {% if results|empty? %}
-      <p>No results for "<b>{{ query }}</b>". Try another search.</p>
-    {% else %}
-      <p>Results for "<b>{{ query }}</b>":</p>
-    {% endif %}
-  {% endif %}
-
+<br>
+<div class="small-10 medium-8 large-6 columns">
   <div>
-    <ul>
-      {% for result in results %}
-        <li>{{ result.a }} ⭤ {{ result.b }}</li>
-      {% endfor %}
-    </ul>
+    <form method="POST" action="/">
+      <input class="input" type="text" name="query" placeholder="Search for a Bible passage" {% if query %}value="{{ query }}"{% endif %} />
+      <input type="submit" value="Search">
+    </form>
   </div>
+</div>
+
+{% if query %}
+  {% if results|empty? %}
+    <p>No results for "<b>{{ query }}</b>". Try another search.</p>
+  {% else %}
+    <p>Results for "<b>{{ query }}</b>":</p>
+  {% endif %}
+{% endif %}
+
+<div>
+  <ul>
+    {% for result in results %}
+    <li>{{ result.a }} ⭤ {{ result.b }}
+      <ul>
+        {%if result.description %}<li>{{ result.description }}</li>{% endif %}
+        {% if result.source %}<li>{{ result.source }}</li>{% endif %}
+      </ul>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}
