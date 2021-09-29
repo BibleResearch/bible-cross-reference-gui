@@ -30,4 +30,85 @@
     {% endfor %}
   </ul>
 </div>
+
+<div id="content">
+  <svg width="400" height="300">
+    <g class="links"></g>
+    <g class="nodes"></g>
+  </svg>
+</div>
+
+<style>
+line {
+  stroke: #ccc;
+}
+</style>
+
+<script>
+var width = 400, height = 300
+
+var nodes = [
+  {name: '{{ query }}'},
+{% for result in results %}
+  {name: '{{ result.b }}'},
+{% endfor %}
+]
+
+var links = [
+{% for result in results %}
+  {source: 0, target: {{forloop.counter}}},
+{% endfor %}
+]
+
+var simulation = d3.forceSimulation(nodes)
+	.force('charge', d3.forceManyBody().strength(-3000))
+	.force('center', d3.forceCenter(width / 2, height / 2))
+	.force('link', d3.forceLink().links(links))
+	.on('tick', ticked);
+
+function updateLinks() {
+	var u = d3.select('.links')
+		.selectAll('line')
+		.data(links)
+		.join('line')
+		.attr('x1', function(d) {
+			return d.source.x
+		})
+		.attr('y1', function(d) {
+			return d.source.y
+		})
+		.attr('x2', function(d) {
+			return d.target.x
+		})
+		.attr('y2', function(d) {
+			return d.target.y
+		});
+}
+
+function updateNodes() {
+	u = d3.select('.nodes')
+		.selectAll('text')
+		.data(nodes)
+		.join('text')
+		.text(function(d) {
+			return d.name
+		})
+		.attr('x', function(d) {
+			return d.x
+		})
+		.attr('y', function(d) {
+			return d.y
+		})
+		.attr('dy', function(d) {
+			return 5
+		});
+}
+
+function ticked() {
+	updateLinks()
+	updateNodes()
+}
+
+document.onload = ticked();
+</script>
 {% endblock %}
