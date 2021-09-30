@@ -28,26 +28,26 @@
 
 <script>
     var width = 400, height = 300
-    
+
     var nodes = [
     {name: '{{ query }}'},
     {% for result in results %}
     {name: '{{ result.b }}'},
     {% endfor %}
     ]
-    
+
     var links = [
     {% for result in results %}
     {source: 0, target: {{forloop.counter}}},
     {% endfor %}
     ]
-    
+
     var simulation = d3.forceSimulation(nodes)
     .force('charge', d3.forceManyBody().strength(-3000))
     .force('center', d3.forceCenter(width / 2, height / 2))
     .force('link', d3.forceLink().links(links))
     .on('tick', ticked);
-    
+
     function updateLinks() {
         var u = d3.select('.links')
         .selectAll('line')
@@ -66,7 +66,7 @@
             return d.target.y
         });
     }
-    
+
     function updateNodes() {
         u = d3.select('.nodes')
         .selectAll('text')
@@ -85,11 +85,11 @@
             return 5
         });
     }
-    
+
     function ticked() {
         updateLinks()
         updateNodes()
     }
-    
+
     document.onload = ticked();
 </script>
