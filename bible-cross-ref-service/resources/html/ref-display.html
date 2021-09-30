@@ -13,7 +13,7 @@
     </ul>
 </div>
 
-<div id="content">
+<div id="graph">
     <svg width="400" height="300">
         <g class="links"></g>
         <g class="nodes"></g>
@@ -30,16 +30,20 @@
     var width = 400, height = 300
 
     var nodes = [
-    {name: '{{ query }}'},
-    {% for result in results %}
-    {name: '{{ result.b }}'},
-    {% endfor %}
+        {name: '{{ query }}'},
+        {% for result in results %}
+            {% ifequal result.a query %}
+                {name: '{{ result.b }}'},
+            {% else %}
+                {name: '{{ result.a }}'},
+            {% endifequal %}
+        {% endfor %}
     ]
 
     var links = [
-    {% for result in results %}
-    {source: 0, target: {{forloop.counter}}},
-    {% endfor %}
+        {% for result in results %}
+            {source: 0, target: {{forloop.counter}}},
+        {% endfor %}
     ]
 
     var simulation = d3.forceSimulation(nodes)
