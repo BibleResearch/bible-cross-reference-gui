@@ -1,6 +1,13 @@
 <p>{{ results|count }} results for "<b>{{ query }}</b>":</p>
 
-<div>
+<div id="graph" style="float: left;">
+    <svg width="1000" height="1000">
+        <g class="links"></g>
+        <g class="nodes"></g>
+    </svg>
+</div>
+
+<div style="float: right;">
     <ul>
         {% for result in results %}
         <li>{{ result.a }} ⭤ {{ result.b }}
@@ -13,13 +20,6 @@
     </ul>
 </div>
 
-<div id="graph">
-    <svg width="400" height="300">
-        <g class="links"></g>
-        <g class="nodes"></g>
-    </svg>
-</div>
-
 <style>
     line {
         stroke: #ccc;
@@ -27,7 +27,7 @@
 </style>
 
 <script>
-    var width = 400, height = 300
+    var width = 1000, height = 1000;
 
     var nodes = [
         {name: '{{ query }}'},
