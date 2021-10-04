@@ -27,7 +27,9 @@
 </style>
 
 <script>
-    var width = 1000, height = 1000;
+    const width = 1000
+    const height = 1000
+    const radius = 10;
 
     var nodes = [
         {name: '{{ query }}'},
@@ -85,9 +87,46 @@
         .attr('y', function(d) {
             return d.y
         })
+        .attr('dx', function(d) {
+            return radius * 1.5
+        })
         .attr('dy', function(d) {
             return 5
         });
+
+        u = d3.select('.nodes')
+        .selectAll('circle')
+        .data(nodes)
+        .join("circle")
+            .attr("r", radius)
+            .attr('cx', function(d) {
+                return d.x
+            })
+            .attr('cy', function(d) {
+                return d.y
+            })
+            .style("fill", "#333")
+            .call(d3.drag()
+              .on("start", dragstarted)
+              .on("drag", dragged)
+              .on("end", dragended));
+    }
+
+    function dragstarted(event, node) {
+      if (!event.active) simulation.alphaTarget(.03).restart();
+      node.fx = event.x;
+      node.fy = event.y;
+    }
+
+    function dragged(event, node) {
+      node.fx = event.x;
+      node.fy = event.y;
+    }
+
+    function dragended(event, node) {
+      if (!event.active) simulation.alphaTarget(.03);
+      event.fx = null;
+      event.fy = null;
     }
 
     function ticked() {
