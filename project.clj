@@ -10,7 +10,8 @@
     [io.pedestal/pedestal.jetty "0.5.7"]
     [ns-tracker/ns-tracker "0.4.0"]
     [org.slf4j/slf4j-simple "1.7.28"]
-    [selmer/selmer "1.12.6"]]
+    [selmer/selmer "1.12.6"]
+    [environ "1.1.0"]]
   :min-lein-version "2.0.0"
   :source-paths ["src"]
   :test-paths ["test"]

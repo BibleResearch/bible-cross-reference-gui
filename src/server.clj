@@ -1,16 +1,17 @@
 (ns server
   (:require [io.pedestal.http :as http]
             [ns-tracker.core :as nst]
-            [service :refer [routes]]))
+            [service :refer [routes]]
+            [environ.core :refer [env]]))
 
 (def service-map
   {::http/routes routes
    ::http/type   :jetty
    ::http/host   "0.0.0.0"
-   ::http/port   3000})
+   ::http/port   5000})
 
-(defn start []
-  (http/start (http/create-server service-map)))
+(defn start [port]
+  (http/start (http/create-server (merge service-map {::http/port port}))))
 
 (defonce server (atom nil))
 
@@ -49,9 +50,6 @@
       (.setDaemon true)
       (.start))))
 
-;; (defn -main [& [port]]
-;;   (let [port (Integer. (or port (env :port) 5000))]
-;;     (jetty/run-jetty (site #'app) {:port port :join? false})))
-
-(defn -main []
-  (start))
+(defn -main [& [port]]
+  (let [port (Integer. (or port (env :port) 5000))]
+    (start port)))
