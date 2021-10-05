@@ -11,7 +11,8 @@
    ::http/port   5000})
 
 (defn start [port]
-  (http/start (http/create-server (merge service-map {::http/port port}))))
+  (http/start (http/create-server (merge service-map {::http/port port
+                                                      ::http/secure-headers {:content-security-policy-settings {:object-src "'none'"}}}))))
 
 (defonce server (atom nil))
 
