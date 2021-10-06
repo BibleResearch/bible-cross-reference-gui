@@ -2,7 +2,7 @@
 
 An API and GUI (built in [Clojure](https://clojure.org/) using [pedestal](http://pedestal.io/)) for interacting with cross references throughout the Bible.
 
-## Usage
+## Local Development
 
 To run the app:
 
@@ -13,8 +13,7 @@ docker-compose run --service-ports dev
 Then (once in the dev environment):
 
 ```
-cd bible-cross-ref-service/
-clj
+lein repl
 ```
 
 This will drop you into a repl where you can start the server by running:
@@ -24,3 +23,5 @@ This will drop you into a repl where you can start the server by running:
 (server/start-dev)
 (server/start-nstracker)
 ```
+
+This will start the server at [http://localhost:5000](http://localhost:5000) and will auto-reload when there is a change in the `src` or `resources` directory.
