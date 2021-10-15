@@ -1,0 +1,20 @@
+<table>
+    <tr>
+        <th>Reference</th>
+        <th>Description</th>
+        <th>Source</th>
+    </tr>
+    {% for result in results %}
+        <tr>
+            <td>
+                {% ifequal result.a query %}
+                    {{ result.b }}
+                {% else %}
+                    {{ result.a }}
+                {% endifequal %}
+            </td>
+            <td>{{ result.description }}</td>
+            <td>{{ result.source }}</td>
+        </tr>
+    {% endfor %}
+</table>
