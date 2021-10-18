@@ -3,8 +3,8 @@
 <br>
 <div class="small-10 medium-8 large-6 columns">
   <div>
-    <form method="POST" action="/">
-      <input class="input" type="text" name="query" placeholder="Search for a Bible passage" {% if query %}value="{{ query }}"{% endif %} />
+    <form method="GET" action="/">
+      <input class="input" type="text" name="q" placeholder="Search for a Bible passage" {% if query %}value="{{ query }}"{% endif %} />
       <input type="submit" value="Search">
     </form>
   </div>

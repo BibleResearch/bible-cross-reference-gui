@@ -9,25 +9,28 @@
 (defn ok [body]
   {:status 200 :body body})
 
-(def get-search-results
-  {:name ::get-search-results
-   :enter (fn [context]
-            (let [query (get-in context [:request :query-params :q])
-                  cross-refs (get-cross-refs query)]
-              (assoc context :response (ok cross-refs))))})
+(defn get-query [request]
+  (get-in request [:query-params :q]))
+
+(defn get-search-results [request]
+  (let [query (get-query request)]
+    (get-cross-refs query)))
+
+(defn show-api-results [request]
+  ;; todo: check to see if there is a query param before trying to get results
+  (ok (get-search-results request)))
 
 (defn show-home
   [request]
   (ok
     (selmer/render-file "html/home.html"
-      (if (= (:request-method request) "get")
-        {}
-        (let [query (get-in request [:params "query"])]
-          {:results (get-cross-refs query)
-          :query query})))))
+      (let [query (get-query request)]
+        (if (not-empty query)
+        {:results (get-search-results request)
+         :query query}
+        {})))))
 
 (def routes
   (route/expand-routes
    #{["/" :get [http/html-body show-home] :route-name :home-get]
-     ["/" :post [http/html-body (body-params/body-params) show-home] :route-name :home-post]
-     ["/api/search" :get [http/json-body get-search-results] :route-name :api-search]}))
+     ["/api/search" :get [http/json-body show-api-results] :route-name :api-search]}))
