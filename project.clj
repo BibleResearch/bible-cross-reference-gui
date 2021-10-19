@@ -14,7 +14,7 @@
     [environ "1.1.0"]]
   :min-lein-version "2.0.0"
   :source-paths ["src"]
-  :test-paths ["test"]
+  :test-paths ["tests"]
   :resource-paths ["resources"]
   :target-path "target/%s/"
   :plugins [[environ/environ.lein "0.3.1"]]
