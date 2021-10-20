@@ -17,7 +17,7 @@
   :test-paths ["tests"]
   :resource-paths ["resources"]
   :target-path "target/%s/"
-  :plugins [[environ/environ.lein "0.3.1"]]
+  :plugins [[environ/environ.lein "0.3.1"] [lein-cloverage "1.2.2"]]
   :hooks [environ.leiningen.hooks]
   :uberjar-name "bible-cross-ref-service.jar"
   :profiles {:production {:env {:production true}}

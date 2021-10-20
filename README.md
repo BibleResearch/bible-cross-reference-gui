@@ -4,6 +4,8 @@ An API and GUI (built in [Clojure](https://clojure.org/) using [pedestal](http:/
 
 ## Local Development
 
+### REPL/Service
+
 To run the app:
 
 ```
@@ -25,3 +27,11 @@ This will drop you into a repl where you can start the server by running:
 ```
 
 This will start the server at [http://localhost:5000](http://localhost:5000) and will auto-reload when there is a change in the `src` or `resources` directory.
+
+### Tests
+
+To run tests and coverage, run:
+
+```shell
+lein cloverage
+```
