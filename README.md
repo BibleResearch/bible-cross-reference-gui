@@ -33,5 +33,5 @@ This will start the server at [http://localhost:5000](http://localhost:5000) and
 To run tests and coverage, run:
 
 ```shell
-lein cloverage
+lein cloverage -e server
 ```
