@@ -6,6 +6,86 @@
     <form method="GET" action="/">
       <input class="input" type="text" name="q" placeholder="Search for a Bible passage" {% if query %}value="{{ query }}"{% endif %} />
       <input type="submit" value="Search">
+
+      <br/><br/>
+
+      <details>
+        <summary>Search Guide</summary>
+
+        Currently, you have to search for a Bible passage in the following format: <code>{BOOK_ABBREVIATION}.{CHAPTER}.{VERSE}</code>
+        (example: <code>Gen.1.1</code> and <code>John.1.1</code>) where BOOK_ABBREVIATION is one of the following:
+
+        <ul>
+          <li>Gen</li>
+          <li>Exod</li>
+          <li>Lev</li>
+          <li>Num</li>
+          <li>Deut</li>
+          <li>Josh</li>
+          <li>Judg</li>
+          <li>Ruth</li>
+          <li>1Sam</li>
+          <li>2Sam</li>
+          <li>1Kgs</li>
+          <li>2Kgs</li>
+          <li>1Chr</li>
+          <li>2Chr</li>
+          <li>Ezra</li>
+          <li>Neh</li>
+          <li>Esth</li>
+          <li>Job</li>
+          <li>Ps</li>
+          <li>Prov</li>
+          <li>Eccl</li>
+          <li>Song</li>
+          <li>Isa</li>
+          <li>Jer</li>
+          <li>Lam</li>
+          <li>Ezek</li>
+          <li>Dan</li>
+          <li>Hos</li>
+          <li>Joel</li>
+          <li>Amos</li>
+          <li>Obad</li>
+          <li>Jonah</li>
+          <li>Mic</li>
+          <li>Nah</li>
+          <li>Hab</li>
+          <li>Zeph</li>
+          <li>Hag</li>
+          <li>Zech</li>
+          <li>Mal</li>
+        </ul>
+        <ul>
+          <li>Matt</li>
+          <li>Mark</li>
+          <li>Luke</li>
+          <li>John</li>
+          <li>Acts</li>
+          <li>Rom</li>
+          <li>1Cor</li>
+          <li>2Cor</li>
+          <li>Gal</li>
+          <li>Eph</li>
+          <li>Phil</li>
+          <li>Col</li>
+          <li>1Thess</li>
+          <li>2Thess</li>
+          <li>1Tim</li>
+          <li>2Tim</li>
+          <li>Titus</li>
+          <li>Phlm</li>
+          <li>Heb</li>
+          <li>Jas</li>
+          <li>1Pet</li>
+          <li>2Pet</li>
+          <li>1John</li>
+          <li>2John</li>
+          <li>3John</li>
+          <li>Jude</li>
+          <li>Rev</li>
+        </ul>
+      </details>
     </form>
   </div>
 </div>
