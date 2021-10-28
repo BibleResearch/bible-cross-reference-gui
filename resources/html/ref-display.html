@@ -1,13 +1,13 @@
 <p>Found {{ results|count }} cross-references for "<b>{{ query }}</b>":</p>
 
-<button id="graphDivDisplayButton" onclick="displayGraph()" style="display: none;">View as graph</button>
-<button id="tableDivDisplayButton" onclick="displayTable()">View as table</button>
+<button id="graphDivDisplayButton" onclick="displayGraph()">View as graph</button>
+<button id="tableDivDisplayButton" onclick="displayTable()" style="display: none;">View as table</button>
 
-<div id="graphDiv">
+<div id="graphDiv" style="display: none;">
     {% include "html/ref-display-graph.html" %}
 </div>
 
-<div id="tableDiv" style="display: none;">
+<div id="tableDiv">
     {% include "html/ref-display-table.html" %}
 </div>
 
