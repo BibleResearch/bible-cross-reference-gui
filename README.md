@@ -9,7 +9,7 @@ An [API and GUI](https://bible-cross-ref-service.herokuapp.com/) (built with [pe
 To run the app:
 
 ```
-docker-compose run --service-ports dev
+docker-compose run --rm --service-ports dev
 ```
 
 Then (once in the dev environment):
