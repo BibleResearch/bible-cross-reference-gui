@@ -1,6 +1,6 @@
 # Bible Cross Reference Service
 
-An API and GUI (built in [Clojure](https://clojure.org/) using [pedestal](http://pedestal.io/)) for interacting with cross references throughout the Bible.
+An [API and GUI](https://bible-cross-ref-service.herokuapp.com/) (built with [pedestal](http://pedestal.io/)) for interacting with cross references throughout the Bible.
 
 ## Local Development
 
